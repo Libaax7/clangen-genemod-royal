@@ -501,6 +501,111 @@ class Name:
             return f"{self.prefix}egg"
         return self.prefix + self.suffix
 
+    def get_title_prefix(self):
+        from .cats import cat_class
+        
+        if id:
+            self.cat = cat_class.fetch_cat(id)
+        titles = ["King", "Queen", "Monarch", "Princess", "Prince", "Duke", "Duchess", "Dukess", "Marquess", "Marchioness", "Earl", "Countess", "Viscount", "Viscountess", "Baron", "Baroness" "Doctor", "Nurse", "Advisor", "Advisor Apprentice"]
+        
+        if game.clan:
+            
+            for t in titles:
+                if t in self.prefix:
+                    return self.prefix
+                
+            title = ""
+            
+            if not self.cat:
+                for c in cat_class.all_cats_list:
+                    if c.status == self.status and c.name.prefix == self.prefix and c.name.suffix == self.suffix:
+                        self.cat = c
+                        break
+            
+            if self.cat:
+                title = self.get_title()
+            
+            if title:
+                return title + " " + self.prefix
+            else:
+                return self.prefix
+        else:
+            return self.prefix
+
+    def get_title(self):
+        from .cats import cat_class
+
+        gender = self.cat.genderalign
+        inheritance = self.cat.inheritance
+        
+        if self.status == 'leader' or self.status == 'deputy':
+            if gender == 'female':
+                return "Queen"
+            elif gender == 'male':
+                return "King"
+            else:
+                return "Monarch"
+        
+        if self.status == 'medicine cat':
+            return random.choice(["Doctor", "Midwife", "Herbalist", 
+        
+        if self.status == 'medicine cat apprentice':
+            return "Nurse"
+                
+        if self.status == 'mediator':
+            return "Advisor"
+        
+        if self.status == 'mediator apprentice':
+            return "Advisor Apprentice"
+        
+        if inheritance:
+            if inheritance.get_parents():
+                for c in inheritance.get_parents():
+                    parent = cat_class.fetch_cat(c)
+                    if parent.status == 'leader' and/or parent.status == 'deputy':
+                        if gender == 'female':
+                            return "Princess"
+                        if gender == 'male':
+                            return "Prince"
+                        else:
+                            return "Prince"
+        if game.clan.leader and game.clan.deputy:
+            if game.clan.leader.is_related(self.cat, False) and game.clan.deputy.is_related(self.cat, False) and self.status == 'warrior':
+                if gender == 'female':
+                    if parent.title == "Duchess"
+                    return "Duchess"
+                     if parent.title == "Marchioness"
+                    return "Marchioness" 
+                    if parent.title == "Countess"
+                    return "Countess"
+                    if parent.title == "Viscountess"
+                    return "Viscountess"
+                    if parent.title == "Baroness"
+                    return "Baroness"
+                     if parent.title == (["Guard", "Gatekeeper"])
+                    return random.choice(["Guard", "Gatekeeper"])
+                    if 
+                else:
+                     return random.choice([""])
+                elif gender == 'male':
+                     if parent.title == "Duke"
+                    return "Duke"
+                     if parent.title == "Marquess"
+                    return "Marquess" 
+                    if parent.title == "Earl"
+                    return "Earl"
+                    if parent.title == "Viscount"
+                    return "Viscount"
+                    if parent.title == "Baron"
+                    return "Baron"
+                else:
+                    return random.choice(["Dukess", "Noble", "Guard"])
+            
+        if self.status == 'elder':
+            return random.choice(["Storyteller", "Kitsitter", "Storykeeper", "])
+        
+        return ""
+    
 
 names = Name()
 names.prefix_history = []
