@@ -506,7 +506,7 @@ class Name:
         
         if id:
             self.cat = cat_class.fetch_cat(id)
-        titles = ["King", "Queen", "Monarch", "Princess", "Prince", "Duke", "Duchess", "Dukess", "Marquess", "Marchioness", "Earl", "Countess", "Viscount", "Viscountess", "Baron", "Baroness" "Doctor", "Nurse", "Advisor", "Advisor Apprentice", "Guard", "Gatekeeper", "Infantry", "Marshal"]
+        titles = ["King", "Queen", "Monarch", "Princess", "Prince", "Duke", "Duchess", "Dukess", "Marquess", "Marchioness", "Earl", "Countess", "Viscount", "Viscountess", "Baron", "Baroness" "Doctor", "Nurse", "Advisor", "Advisor Apprentice", "Guard", "Gatekeeper", "Infantry", "Marshal", "Storyteller", "Kitsitter", "Storykeeper", "Cleaner", "Organizer", "Squire", "Midwife", "Herbalist", "Potion maker", "Preist", "Moss Farmer", "Hunter", "Bucher", "Nest Weaver", "Fisher", "Den Builder", "Tax Collector", "Servant", "Peasant"]
         
         if game.clan:
             
@@ -547,7 +547,7 @@ class Name:
                 return "Monarch"
         
         if self.status == 'medicine cat':
-            return random.choice(["Doctor", "Midwife", "Herbalist", 
+            return random.choice(["Doctor", "Midwife", "Herbalist", "Potion maker", "Preist")]
         
         if self.status == 'medicine cat apprentice':
             return "Nurse"
@@ -581,35 +581,65 @@ class Name:
                             return "Lady"
                 else: return "Marchioness" 
                     if parent.title == "Countess"
-                        return "Countess"
+			                     if self.status == 'newborn' or 'kit' or 'apprentice'
+                            return "Lady"
+                else: return "Countess"
                     if parent.title == "Viscountess"
-                        return "Viscountess"
+		                     if self.status == 'newborn' or 'kit' or 'apprentice'
+                            return "Lady"
+                else: return "Viscountess"
                     if parent.title == "Baroness"
-                        return "Baroness"
-                elif: if parent.title == (["Guard", "Gatekeeper", "Infantry", "Marshal"]) 'warrior'
-                        return random.choice(["Guard", "Gatekeeper"])
+		                     if self.status == 'newborn' or 'kit' or 'apprentice'
+                            return "Lady"
+                else:  return "Baroness"
+                elif: if parent.title == (["Guard", "Gatekeeper", "Infantry", "Marshal"])
+							if self.status == 'newborn' or 'kit' 
+								return "Lady
+		                     if self.status == 'apprentice'
+                            return "Squire"
+					  else:  return(["Guard", "Gatekeeper"])
                     if self.role == "Guard" or "Gatekeeper" and self.experience_levels_range == "expert"
                         return random.choice(["Guard", "Gatekeeper", "Infantry"])
                     if self.role == "Guard" or "Gatekeeper" and self.experience_levels_range == "master"
                         return "Marshal"
+		elif self.status == 'warrior' and parent.title(["Moss Farmer", "Hunter", "Bucher", "Nest Weaver", "Fisher", "Den Builder", "Tax Collector", "Servant"])
+								return random.choice(["Moss Farmer", "Hunter", "Bucher", "Nest Weaver", "Fisher", "Den Builder", "Tax Collector", "Servant"])
                 elif gender == 'male':
                      if parent.title == "Duke"
-                        return "Duke"
+		  if self.status == 'newborn' or 'kit' or 'apprentice'
+                            return "Lord"
+                else: return "Duke"
                      if parent.title == "Marquess"
-                        return "Marquess" 
+				  if self.status == 'newborn' or 'kit' or 'apprentice'
+                            return "Lord"
+                else: return "Marquess" 
                     if parent.title == "Earl"
-                        return "Earl"
+				  if self.status == 'newborn' or 'kit' or 'apprentice'
+                            return "Lord"
+                else: return "Earl"
                     if parent.title == "Viscount"
-                        return "Viscount"
+							  if self.status == 'newborn' or 'kit' or 'apprentice'
+                            return "Lord"
+                else: return "Viscount"
                     if parent.title == "Baron"
-                        return "Baron"
+				  if self.status == 'newborn' or 'kit' or 'apprentice'
+                            return "Lord"
+                else: return "Baron"
                elif: if parent.title == (["Guard", "Gatekeeper", "Infantry", "Marshal"]) and self.status 'warrior'
-                        return random.choice(["Guard", "Gatekeeper"])
+                       if self.status == 'newborn' or 'kit' 
+								return "Lord"
+		                     if self.status == 'apprentice'
+                            return "Squire"
+					  else:  return(["Guard", "Gatekeeper"])
                     if self.role == "Guard" or "Gatekeeper" and self.experience_levels_range == "expert"
                         return random.choice(["Guard", "Gatekeeper", "Infantry"])
                     if self.role == "Guard" or "Gatekeeper" and self.experience_levels_range == "master"
                         return "Marshal"
- 
+							elif self.status == 'warrior' or 'apprentice' and parent.title(["Moss Farmer", "Hunter", "Bucher", "Nest Weaver", "Fisher", "Den Builder", "Tax Collector", "Servant"])
+								return random.choice(["Moss Farmer", "Hunter", "Bucher", "Nest Weaver", "Fisher", "Den Builder", "Tax Collector", "Servant"])
+									if self.status == 'newborn' or 'kit' 
+										return "Peasant"
+
         if self.status == 'elder':
             return random.choice(["Storyteller", "Kitsitter", "Storykeeper", "Cleaner", "Organizer"])
         
