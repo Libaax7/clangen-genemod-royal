@@ -506,7 +506,7 @@ class Name:
         
         if id:
             self.cat = cat_class.fetch_cat(id)
-        titles = ["King", "Queen", "Monarch", "Princess", "Prince", "Duke", "Duchess", "Dukess", "Marquess", "Marchioness", "Earl", "Countess", "Viscount", "Viscountess", "Baron", "Baroness" "Doctor", "Nurse", "Advisor", "Advisor Apprentice"]
+        titles = ["King", "Queen", "Monarch", "Princess", "Prince", "Duke", "Duchess", "Dukess", "Marquess", "Marchioness", "Earl", "Countess", "Viscount", "Viscountess", "Baron", "Baroness" "Doctor", "Nurse", "Advisor", "Advisor Apprentice", "Guard", "Gatekeeper", "Infantry", "Marshal"]
         
         if game.clan:
             
@@ -573,36 +573,45 @@ class Name:
             if game.clan.leader.is_related(self.cat, False) and game.clan.deputy.is_related(self.cat, False) and self.status == 'warrior':
                 if gender == 'female':
                     if parent.title == "Duchess"
-                    return "Duchess"
+                        if self.status == 'newborn' or 'kit' or 'apprentice'
+                            return "Lady"
+                else: return "Duchess" 
                      if parent.title == "Marchioness"
-                    return "Marchioness" 
+                                        if self.status == 'newborn' or 'kit' or 'apprentice'
+                            return "Lady"
+                else: return "Marchioness" 
                     if parent.title == "Countess"
-                    return "Countess"
+                        return "Countess"
                     if parent.title == "Viscountess"
-                    return "Viscountess"
+                        return "Viscountess"
                     if parent.title == "Baroness"
-                    return "Baroness"
-                     if parent.title == (["Guard", "Gatekeeper"])
-                    return random.choice(["Guard", "Gatekeeper"])
-                    if 
-                else:
-                     return random.choice([""])
+                        return "Baroness"
+                elif: if parent.title == (["Guard", "Gatekeeper", "Infantry", "Marshal"]) 'warrior'
+                        return random.choice(["Guard", "Gatekeeper"])
+                    if self.role == "Guard" or "Gatekeeper" and self.experience_levels_range == "expert"
+                        return random.choice(["Guard", "Gatekeeper", "Infantry"])
+                    if self.role == "Guard" or "Gatekeeper" and self.experience_levels_range == "master"
+                        return "Marshal"
                 elif gender == 'male':
                      if parent.title == "Duke"
-                    return "Duke"
+                        return "Duke"
                      if parent.title == "Marquess"
-                    return "Marquess" 
+                        return "Marquess" 
                     if parent.title == "Earl"
-                    return "Earl"
+                        return "Earl"
                     if parent.title == "Viscount"
-                    return "Viscount"
+                        return "Viscount"
                     if parent.title == "Baron"
-                    return "Baron"
-                else:
-                    return random.choice(["Dukess", "Noble", "Guard"])
-            
+                        return "Baron"
+               elif: if parent.title == (["Guard", "Gatekeeper", "Infantry", "Marshal"]) and self.status 'warrior'
+                        return random.choice(["Guard", "Gatekeeper"])
+                    if self.role == "Guard" or "Gatekeeper" and self.experience_levels_range == "expert"
+                        return random.choice(["Guard", "Gatekeeper", "Infantry"])
+                    if self.role == "Guard" or "Gatekeeper" and self.experience_levels_range == "master"
+                        return "Marshal"
+ 
         if self.status == 'elder':
-            return random.choice(["Storyteller", "Kitsitter", "Storykeeper", "])
+            return random.choice(["Storyteller", "Kitsitter", "Storykeeper", "Cleaner", "Organizer"])
         
         return ""
     
